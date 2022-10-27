@@ -19,7 +19,8 @@ trait HasUsers
     {
         return $this->morphToMany(static::getUserClassName(), 'userable')
             ->using(Userable::class)
-            ->withPivot('options');
+            ->withPivot('options')
+            ->withTimestamps();
     }
 
     public function attachUser(User $model, ?array $options = null): static
