@@ -6,6 +6,7 @@ use ArrayAccess;
 use Foxws\Users\Models\User;
 use Foxws\Users\Models\Userable;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Collection;
 
 trait HasUsers
 {
@@ -28,9 +29,7 @@ trait HasUsers
 
     public function attachUsers(array | ArrayAccess | User $users, ?array $options = null): static
     {
-        $className = static::getUserClassName();
-
-        $users = collect($className::find($users));
+        $users = static::convertToUsers($users);
 
         $this->users()->syncWithPivotValues(
             ids: $users->pluck('id')->toArray(),
@@ -57,7 +56,7 @@ trait HasUsers
         return $this;
     }
 
-    protected static function convertToUsers($values)
+    protected static function convertToUsers(array | ArrayAccess | User $values): Collection
     {
         if ($values instanceof User) {
             $values = [$values];
