@@ -15,6 +15,7 @@ class UsersServiceProvider extends PackageServiceProvider
             ->hasMigrations([
                 'create_users_table',
                 'create_teams_table',
+                'create_usergroups_table',
             ]);
     }
 }
