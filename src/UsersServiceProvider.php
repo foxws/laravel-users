@@ -2,7 +2,6 @@
 
 namespace Foxws\Users;
 
-use Foxws\Users\Commands\UsersCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
